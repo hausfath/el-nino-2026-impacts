@@ -25,8 +25,11 @@ FIG = HERE.parent
 ROOT = FIG.parent
 # the dashboard repo (github.com/hausfath/climate-dashboard): $CLIMATE_DASHBOARD, the local working copy, or a sibling clone
 import os
-DASH = next(p / "elnino_map" / "data" for p in [Path(os.environ["CLIMATE_DASHBOARD"])] * ("CLIMATE_DASHBOARD" in os.environ)
-            + [ROOT.parents[1] / "Climate Dashboard", ROOT.parent / "climate-dashboard"] if (p / "elnino_map" / "data").exists())
+_cands = ([Path(os.environ["CLIMATE_DASHBOARD"])] if os.environ.get("CLIMATE_DASHBOARD") else []) + \
+    [ROOT.parents[1] / "Climate Dashboard", ROOT.parent / "climate-dashboard"]
+DASH = next((p / "elnino_map" / "data" for p in _cands if (p / "elnino_map" / "data").exists()), None)
+if DASH is None:
+    raise SystemExit("set CLIMATE_DASHBOARD to a clone of github.com/hausfath/climate-dashboard")
 
 
 def load_ns(script, upto, extra=None):
@@ -104,19 +107,48 @@ trob = (((m.t_robust_JF > 0) & (m.t91_robust_JF > 0) & (m.tlmr_robust_JF > 0)) |
         ((m.t_robust_JF < 0) & (m.t91_robust_JF < 0) & (m.tlmr_robust_JF < 0))).values[:, order]
 LO, LA = (lon >= -30) & (lon <= 60), (lat >= 28) & (lat <= 76)
 cut = lambda f: np.round(np.where(np.isfinite(f), f, np.nan)[np.ix_(LA, LO)], 3)
+# Rain panels on the impacts map's colour scale (27 Sep 2026): multi-model mean change as % of the GPCP 1991–2020
+# normal, dry-season desert cells masked. Dots keep this figure's stricter robustness test (>=80% of models agree AND
+# the mean is >= 0.5 of a typical year-to-year swing), because the figure's claim rests on it; on the map's looser dot
+# rule (|mean| >= 10%) robust areas would be ~20-26% of European land instead of 8% / 2%. Temperature stays in swings.
+import sys as _sys
+_sys.path.insert(0, str(ROOT / "model_patterns")); import windows as WN   # noqa: E402
+SA = xr.open_dataset(MP / "seasonal_anoms.nc")
+o_ = xr.open_dataset(MP / "obs_ref.nc")
+_land = o_.land.values.astype(bool)
+def pct_panel(s):
+    arr = np.array([SA.prate.sel(model=mdl, season=s).values for mdl in WN.NMME + WN.C3S])
+    cl = o_[f"pr_clim_{s}"].values
+    bad = ((cl < 0.5) & _land) | ~(cl > 0)
+    mm = arr.mean(0)
+    pct = np.where(bad, np.nan, 100 * mm / np.where(cl > 0, cl, np.nan))
+    agree = (np.sign(arr) == np.sign(mm)).mean(0)
+    rob = (agree >= 0.8 - 1e-9) & (np.abs(pct) >= 10) & ~bad
+    return pct[:, order], rob[:, order], mm, cl, arr.shape[0]
+PP = {s: pct_panel(s) for s in ("OND", "JF")}
 panels = []
-for title, f, rob, cmap in [("Rain & snow, Oct–Dec", z("pr_z_OND"), z("pr_robust_OND") != 0, "pr"),
-                            ("Rain & snow, Jan–Feb", z("pr_z_JF"), z("pr_robust_JF") != 0, "pr"),
+for title, f, rob, cmap in [("Rain & snow, Oct–Dec", PP["OND"][0], z("pr_robust_OND") != 0, "pct"),
+                            ("Rain & snow, Jan–Feb", PP["JF"][0], z("pr_robust_JF") != 0, "pct"),
                             ("Temperature, Jan–Feb (trend removed)", z("t_z_JF"), trob, "t")]:
     v = cut(f)
     panels.append({"title": title, "cmap": cmap, "z": [[None if not np.isfinite(x) else float(x) for x in row] for row in v],
                    "robust": cut(rob.astype(float)).astype(int).tolist()})
-o_ = xr.open_dataset(MP / "obs_ref.nc")
 L2, A2 = np.meshgrid(np.where(m.lon > 180, m.lon - 360, m.lon), m.lat.values)
 eu = shapely.contains_xy(box(-11, 35, 40, 71), L2, A2) & o_.land.values.astype(bool)
 Wt = np.cos(np.deg2rad(A2))
 frac = lambda x: 100 * float((Wt * (x & eu)).sum() / (Wt * eu).sum())
+# robust land fractions, rain on the map's rule (unsorted grid, like eu)
+_rob_u = lambda s: ((np.sign(np.array([SA.prate.sel(model=mdl, season=s).values for mdl in WN.NMME + WN.C3S])) == np.sign(PP[s][2])).mean(0) >= 0.8 - 1e-9) \
+    & (np.abs(100 * PP[s][2] / np.where(PP[s][3] > 0, PP[s][3], np.nan)) >= 10) & ~(((PP[s][3] < 0.5) & _land) | ~(PP[s][3] > 0))
 f_ond, f_jf = frac(m.pr_robust_OND.values != 0), frac(m.pr_robust_JF.values != 0)
+maprule = {"pr_OND": round(frac(_rob_u("OND"))), "pr_JF": round(frac(_rob_u("JF")))}   # reported for reference only
+# regional-mean rain change for the bullet (europe.py boxes, land only, cos-lat weights, % of the regional normal)
+_E = (ROOT / "model_patterns" / "europe.py").read_text()
+_REG = eval(_E[_E.index("REG = {") + 6:_E.index("}", _E.index("REG = {")) + 1], {"box": box})
+def reg_pct(name, s):
+    g = _REG[name]; msk = shapely.contains_xy(g, L2, A2) & _land
+    mm, cl = PP[s][2], PP[s][3]
+    return round(float(100 * np.sum((mm * Wt)[msk]) / np.sum((cl * Wt)[msk])))
 f_t = frac(((m.t_robust_JF != 0) & (np.sign(m.t_robust_JF) == np.sign(m.tlmr_robust_JF)) & (m.t91_robust_JF != 0)).values)
 val = lambda region, var, season, col: tab[(tab.region == region) & (tab["var"] == var) & (tab.season == season)].iloc[0][col]
 txt = requests.get("https://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/norm.nao.monthly.b5001.current.ascii", timeout=60).text
@@ -137,6 +169,7 @@ europe = {
     "uk_n": int(val("UK & Ireland", "pr", "OND", "models_pos") + val("UK & Ireland", "pr", "OND", "models_neg")),
     "sc_neg": int(val("Scandinavia & Baltic", "t", "JF", "models_neg")),
     "sc_n": int(val("Scandinavia & Baltic", "t", "JF", "models_pos") + val("Scandinavia & Baltic", "t", "JF", "models_neg")),
+    "maprule_robust_pct": maprule, "uk_pct": reg_pct("UK & Ireland", "OND"), "ce_pct": reg_pct("Central Europe", "OND"), "n_models": PP["OND"][4],
     "shift_lo": round(float(min(val("UK & Ireland", "pr", "OND", "mmm_z"), val("Central Europe", "pr", "OND", "mmm_z"))), 1),
     "shift_hi": round(float(abs(val("Scandinavia & Baltic", "t", "JF", "mmm_z"))), 1),
 }
@@ -148,7 +181,7 @@ out = {"grid": grid, "models": MODELS, "labels": labels, "footers": footers, "eu
                  "oni": meta["oni_ndj_strong"], "init": meta["init"], "n_regions": meta["n_map_regions"],
                  "horizon": WN.label([WN.ALL_END]), "nmme_horizon": WN.label([WN.NMME_END])}}
 (HERE / "figdata.json").write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")))
-print("figdata.json:", len(grid), "grid rows,", len(labels), "labels, NAO", djf, "| Europe robust %", europe["robust_pct"],
+print("figdata.json:", len(grid), "grid rows,", len(labels), "labels, NAO", djf, "| Europe robust %", europe["robust_pct"], "| UK/CE OND %", europe["uk_pct"], europe["ce_pct"],
       "| UK", europe["uk_pos"], "/", europe["uk_n"], "Scand", europe["sc_neg"], "/", europe["sc_n"], europe["shift_lo"], europe["shift_hi"])
 for k, v in footers.items():
     print(f"  {k}: {v}")

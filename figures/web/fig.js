@@ -257,11 +257,18 @@
       const c = document.createElement('canvas'), dpr = 2; c.width = pw * dpr; c.height = ph * dpr; c.style.cssText = `position:static;width:${pw}px;height:${ph}px;border-radius:8px;border:1px solid ${css('--line-strong')}`;
       box.appendChild(c);
       const g = c.getContext('2d'); g.scale(dpr, dpr);
-      g.fillStyle = neutral; g.fillRect(0, 0, pw, ph);
+      const PCT = P.cmap === 'pct';
+      g.fillStyle = PCT ? css('--map-ocean') : neutral; g.fillRect(0, 0, pw, ph);
+      if (PCT) { g.fillStyle = css('--map-land'); for (const r of geo.land) { g.beginPath(); r.forEach(([lo, la], q) => (q ? g.lineTo(X(lo), Y(la)) : g.moveTo(X(lo), Y(la)))); g.closePath(); g.fill(); } }
       // field: one pixel per 1° cell, smoothed on scale-up
       const nx = U.lon.length, ny = U.lat.length, off = document.createElement('canvas'); off.width = nx; off.height = ny;
       const og = off.getContext('2d'), im = og.createImageData(nx, ny);
-      P.z.forEach((row, jj) => row.forEach((v, ii) => { const o = (jj * nx + ii) * 4; if (v === null) return; const [r, gg, b] = cmap(CM[P.cmap], v); im.data[o] = r; im.data[o + 1] = gg; im.data[o + 2] = b; im.data[o + 3] = 255; }));
+      const fa = +css('--map-field-a');
+      P.z.forEach((row, jj) => row.forEach((v, ii) => {
+        const o = (jj * nx + ii) * 4; if (v === null) return;
+        const [r, gg, b] = PCT ? E.prColor(v) : cmap(CM[P.cmap], v);
+        im.data[o] = r; im.data[o + 1] = gg; im.data[o + 2] = b; im.data[o + 3] = PCT ? 255 * E.prAlpha(v) * fa : 255;
+      }));
       og.putImageData(im, 0, 0);
       g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
       const lw = U.lon[0] - 0.5, le = U.lon[nx - 1] + 0.5, ln = U.lat[0] + 0.5, ls = U.lat[ny - 1] - 0.5;   // lat descending
@@ -276,13 +283,20 @@
       P.robust.forEach((row, jj) => row.forEach((v, ii) => { if (!v) return; g.beginPath(); g.arc(X(U.lon[ii]), Y(U.lat[jj]), 1.6, 0, 7); g.fill(); }));
       // colour bar
       const cb = document.createElement('canvas'); cb.width = pw * 2; cb.height = 20; cb.style.cssText = `position:static;width:${pw}px;height:10px;border-radius:5px;display:block;margin-top:10px`;
-      const cg = cb.getContext('2d'); for (let q = 0; q < pw * 2; q++) { const [r, gg, b] = cmap(CM[P.cmap], -1.5 + 3 * q / (pw * 2)); cg.fillStyle = `rgb(${r},${gg},${b})`; cg.fillRect(q, 0, 1, 20); }
+      const cg = cb.getContext('2d');
+      if (PCT) { cg.fillStyle = css('--map-land'); cg.fillRect(0, 0, pw * 2, 20); }
+      for (let q = 0; q < pw * 2; q++) {
+        if (PCT) { const v = -60 + 120 * q / (pw * 2), [r, gg, b] = E.prColor(v); cg.fillStyle = `rgba(${r | 0},${gg | 0},${b | 0},${E.prAlpha(v) * fa})`; }
+        else { const [r, gg, b] = cmap(CM[P.cmap], -1.5 + 3 * q / (pw * 2)); cg.fillStyle = `rgb(${r},${gg},${b})`; }
+        cg.fillRect(q, 0, 1, 20);
+      }
       box.appendChild(cb);
-      box.appendChild(H(`<div class="cb-t"><span>−1.5</span><span>−1</span><span>−0.5</span><span>0</span><span>+0.5</span><span>+1</span><span>+1.5</span></div>`));
-      box.appendChild(H(`<div class="cb-l">${P.cmap === 'pr' ? '← drier · wetter →' : '← colder · warmer →'}</div>`));
+      box.appendChild(H(PCT ? `<div class="cb-t"><span>−60%</span><span>−30%</span><span>0</span><span>+30%</span><span>+60%</span></div>`
+        : `<div class="cb-t"><span>−1.5</span><span>−1</span><span>−0.5</span><span>0</span><span>+0.5</span><span>+1</span><span>+1.5</span></div>`));
+      box.appendChild(H(`<div class="cb-l">${PCT ? '← drier · wetter →  (% of the 1991–2020 normal)' : '← colder · warmer →  (typical year-to-year swings)'}</div>`));
     });
     const R = U.robust_pct;
-    add(`<p class="f-sub" style="position:absolute; left:40px; right:40px; top:${px(top + ph + 96)}; font-size:13px">Shading: average of ${NMOD} seasonal forecast models (NMME + Copernicus C3S, ${S.init} start), as a fraction of a typical year-to-year swing. Dots: robust signal (≥80% of models agree and ≥0.5 of a typical swing). Robust areas cover <b>${R.pr_OND}%</b> of European land for Oct–Dec rain (mostly western Ireland, Britain and France), <b>${R.pr_JF}%</b> for Jan–Feb rain and <b>${R.t_JF}%</b> for Jan–Feb temperature.</p>`);
+    add(`<p class="f-sub" style="position:absolute; left:40px; right:40px; top:${px(top + ph + 96)}; font-size:13px">Average of ${U.n_models} seasonal forecast models (NMME + Copernicus C3S, ${S.init} start). Rain: change as % of the 1991–2020 normal, the same scale as the impacts map. Temperature: in units of a typical year-to-year swing, trend removed. Dots: robust signal, where at least 80% of models agree and the average shift is at least half a typical year-to-year swing. Robust areas cover <b>${R.pr_OND}%</b> of European land for Oct–Dec rain (mostly western Ireland, Britain and France), <b>${R.pr_JF}%</b> for Jan–Feb rain and <b>${R.t_JF}%</b> for Jan–Feb temperature.</p>`);
     // NAO bars
     const cw = 640, ch = 320, y0 = 690, x0 = 40, pl = 46, pb = 60, ymin = -2, ymax = 1.75, sy = (ch - pb - 36) / (ymax - ymin), yv = (v) => 36 + (ymax - v) * sy;
     const bw = (cw - pl - 10) / U.nao.length;
@@ -299,7 +313,7 @@
     s += `<text class="yl" x="${pl}" y="${ch - 20}" style="font-style:italic">Textbook El Niño expectation: negative NAO (cold north, wet south).</text><text class="yl" x="${pl}" y="${ch - 4}" style="font-style:italic">Positive NAO = mild, wet, stormy UK &amp; northern Europe.</text></svg>`;
     add(s);
     add(`<div class="eu-box" style="left:740px; top:${px(y0)}; width:660px"><h3>What this means</h3><ul>
-      <li>Models lean wet for the UK and central Europe in Oct–Dec (<b>${U.uk_pos} of ${U.uk_n}</b> models) and colder for Scandinavia in Jan–Feb (<b>${U.sc_neg} of ${U.sc_n}</b>), but the shifts are small: ${U.shift_lo}–${U.shift_hi} of a typical year-to-year swing.</li>
+      <li>Models lean wet for the UK and central Europe in Oct–Dec (<b>${U.uk_pos} of ${U.uk_n}</b> models) and colder for Scandinavia in Jan–Feb (<b>${U.sc_neg} of ${U.sc_n}</b>), but the shifts are small: about ${U.uk_pct === U.ce_pct ? `+${U.uk_pct}%` : `+${U.uk_pct}% and +${U.ce_pct}%`} rain for the UK and central Europe, and ${U.shift_hi} of a typical year-to-year swing for Scandinavian temperature.</li>
       <li>No European region passes the bar used for the global impacts map, and past strong El Niño winters split ${npos}–${nneg} on the NAO.</li>
       <li>The textbook late-winter pattern (cold north, wet south) mostly appears when a sudden stratospheric warming occurs, which can't be forecast months ahead (Ineson and Scaife 2009).</li>
       <li>The El Niño–Europe link may have weakened since the 1970s (Ivasić et al. 2021).</li></ul></div>`);
