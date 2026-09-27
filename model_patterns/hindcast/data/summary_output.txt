@@ -1,0 +1,138 @@
+Slope ratio model/obs (same years, ONI) and model slopes (pp of normal per degC):
+   region season    set  n_models  ratio_median  ratio_min  ratio_max  ratio1950_median  model_slope_median  model_slope_min  model_slope_max  n_ratio_gt1  skill_median
+NorCal_d2    DJF    all        11          0.80       0.06       2.13              0.84                5.84             0.44            11.13            4          0.15
+NorCal_d2    DJF active         6          0.97       0.45       1.34              1.03                7.14             2.71             9.93            3          0.17
+NorCal_d2    JFM    all        11          0.59      -0.06       1.32              0.54                5.85            -0.59            11.80            4          0.18
+NorCal_d2    JFM active         6          0.89       0.17       1.15              0.83                9.10             1.36            11.80            3          0.20
+ SoCal_d6    DJF    all        11          1.36       0.22       1.65              1.24               21.14             3.54            25.38            7          0.31
+ SoCal_d6    DJF active         6          1.08       0.76       1.65              1.05               17.88            11.83            25.38            3          0.33
+ SoCal_d6    JFM    all        11          0.97       0.15       1.25              0.95               22.65             3.26            26.39            5          0.34
+ SoCal_d6    JFM active         6          0.96       0.74       1.25              0.81               19.42            16.05            26.39            2          0.35
+
+Obs slope 95% CI (ONI, 1950-2025):
+  NorCal_d2 DJF: 6.9 [-1.8, 15.6] pp/degC
+  SoCal_d6 DJF: 17.1 [5.2, 29.0] pp/degC
+  NorCal_d2 JFM: 10.9 [2.0, 19.9] pp/degC
+  SoCal_d6 JFM: 23.8 [10.9, 36.8] pp/degC
+
+Member-level outcomes in hindcast years with model ens-mean NDJ Nino3.4 >= 2.0 degC (1982-2025, excl. 2026):
+NorCal_d2 DJF
+                      n  yrs  below100  below70  median
+model                                                  
+CMC1-CanCM3        30.0  3.0      0.50     0.13  101.25
+CMC2-CanCM4        30.0  3.0      0.50     0.17   98.65
+COLA-RSMAS-CCSM4   10.0  1.0      0.30     0.20  133.90
+COLA-RSMAS-CESM1   30.0  3.0      0.37     0.17  125.40
+CanSIPS-IC3        60.0  3.0      0.18     0.05  140.40
+CanSIPS-IC4       120.0  3.0      0.41     0.21  113.30
+CanSIPSv2          60.0  3.0      0.20     0.05  127.15
+GFDL-SPEAR         30.0  2.0      0.33     0.07  122.45
+NASA-GEOSS2S       12.0  3.0      0.08     0.00  155.55
+NCAR-CESM1         10.0  1.0      0.20     0.00  118.35
+NCEP-CFSv2         56.0  2.0      0.29     0.07  126.75
+NorCal_d2 JFM
+                      n  yrs  below100  below70  median
+model                                                  
+CMC1-CanCM3        30.0  3.0      0.50     0.13  105.00
+CMC2-CanCM4        30.0  3.0      0.40     0.17  113.55
+COLA-RSMAS-CCSM4   10.0  1.0      0.30     0.10  134.00
+COLA-RSMAS-CESM1   30.0  3.0      0.33     0.10  132.80
+CanSIPS-IC3        60.0  3.0      0.20     0.02  137.55
+CanSIPS-IC4       120.0  3.0      0.41     0.18  116.75
+CanSIPSv2          60.0  3.0      0.27     0.03  130.30
+GFDL-SPEAR         30.0  2.0      0.30     0.10  118.00
+NASA-GEOSS2S       12.0  3.0      0.00     0.00  142.55
+NCAR-CESM1         10.0  1.0      0.20     0.00  119.80
+NCEP-CFSv2         56.0  2.0      0.21     0.04  121.65
+SoCal_d6 DJF
+                      n  yrs  below100  below70  median
+model                                                  
+CMC1-CanCM3        30.0  3.0      0.50     0.23   97.35
+CMC2-CanCM4        30.0  3.0      0.20     0.07  158.35
+COLA-RSMAS-CCSM4   10.0  1.0      0.20     0.10  180.40
+COLA-RSMAS-CESM1   30.0  3.0      0.27     0.13  157.50
+CanSIPS-IC3        60.0  3.0      0.17     0.07  172.50
+CanSIPS-IC4       120.0  3.0      0.38     0.22  140.05
+CanSIPSv2          60.0  3.0      0.17     0.08  171.00
+GFDL-SPEAR         30.0  2.0      0.20     0.07  155.00
+NASA-GEOSS2S       12.0  3.0      0.00     0.00  129.65
+NCAR-CESM1         10.0  1.0      0.20     0.10  133.35
+NCEP-CFSv2         56.0  2.0      0.25     0.11  130.80
+SoCal_d6 JFM
+                      n  yrs  below100  below70  median
+model                                                  
+CMC1-CanCM3        30.0  3.0      0.50     0.30   97.70
+CMC2-CanCM4        30.0  3.0      0.07     0.07  148.05
+COLA-RSMAS-CCSM4   10.0  1.0      0.10     0.00  154.65
+COLA-RSMAS-CESM1   30.0  3.0      0.10     0.00  162.10
+CanSIPS-IC3        60.0  3.0      0.18     0.05  180.75
+CanSIPS-IC4       120.0  3.0      0.33     0.18  147.00
+CanSIPSv2          60.0  3.0      0.15     0.05  163.50
+GFDL-SPEAR         30.0  2.0      0.13     0.03  173.85
+NASA-GEOSS2S       12.0  3.0      0.00     0.00  179.65
+NCAR-CESM1         10.0  1.0      0.40     0.10  128.85
+NCEP-CFSv2         56.0  2.0      0.23     0.02  131.25
+   region season  n_members  models  frac_below_normal_pooled  frac_below70_pooled  frac_below_normal_model_median  median_pct
+NorCal_d2    DJF        448      11                      0.32                 0.12                            0.30      122.10
+NorCal_d2    JFM        448      11                      0.31                 0.09                            0.30      122.15
+ SoCal_d6    DJF        448      11                      0.27                 0.13                            0.20      145.55
+ SoCal_d6    JFM        448      11                      0.23                 0.09                            0.15      150.95
+Observed ONI>=1.5: frac below normal: {('NorCal_d2', 'DJF'): '2/8', ('NorCal_d2', 'JFM'): '1/8', ('SoCal_d6', 'DJF'): '2/8', ('SoCal_d6', 'JFM'): '2/8'}  below 70%: {('NorCal_d2', 'DJF'): '1/8', ('NorCal_d2', 'JFM'): '1/8', ('SoCal_d6', 'DJF'): '1/8', ('SoCal_d6', 'JFM'): '2/8'}
+Observed ONI>=2.0: frac below normal: {('NorCal_d2', 'DJF'): '0/3', ('NorCal_d2', 'JFM'): '0/3', ('SoCal_d6', 'DJF'): '1/3', ('SoCal_d6', 'JFM'): '1/3'}  below 70%: {('NorCal_d2', 'DJF'): '0/3', ('NorCal_d2', 'JFM'): '0/3', ('SoCal_d6', 'DJF'): '1/3', ('SoCal_d6', 'JFM'): '1/3'}
+
+Base rates, all years 1982-2025: model members <100%: {('NorCal_d2', 'DJF'): 0.55, ('NorCal_d2', 'JFM'): 0.55, ('SoCal_d6', 'DJF'): 0.6, ('SoCal_d6', 'JFM'): 0.6}
+obs <100% 1982-2025: {('NorCal_d2', 'DJF'): 0.59, ('NorCal_d2', 'JFM'): 0.64, ('SoCal_d6', 'DJF'): 0.66, ('SoCal_d6', 'JFM'): 0.64}
+
+Hit/miss (ens-mean >100% = wet call):
+  1982-83 NorCal_d2 DJF: obs 137% | models wet call 9/9, model range 106-133%, median 122%
+  1982-83 NorCal_d2 JFM: obs 186% | models wet call 9/9, model range 111-140%, median 124%
+  1982-83 SoCal_d6 DJF: obs 137% | models wet call 9/9, model range 134-189%, median 160%
+  1982-83 SoCal_d6 JFM: obs 204% | models wet call 9/9, model range 140-206%, median 177%
+  1997-98 NorCal_d2 DJF: obs 166% | models wet call 11/11, model range 105-162%, median 135%
+  1997-98 NorCal_d2 JFM: obs 190% | models wet call 11/11, model range 110-161%, median 132%
+  1997-98 SoCal_d6 DJF: obs 233% | models wet call 10/11, model range 96-231%, median 167%
+  1997-98 SoCal_d6 JFM: obs 227% | models wet call 11/11, model range 109-243%, median 178%
+  2015-16 NorCal_d2 DJF: obs 105% | models wet call 9/10, model range 100-155%, median 121%
+  2015-16 NorCal_d2 JFM: obs 126% | models wet call 9/10, model range 100-163%, median 123%
+  2015-16 SoCal_d6 DJF: obs 60% | models wet call 9/10, model range 99-197%, median 149%
+  2015-16 SoCal_d6 JFM: obs 68% | models wet call 9/10, model range 94-205%, median 160%
+  2023-24 NorCal_d2 DJF: obs 109% | models wet call 5/7, model range 81-117%, median 103%
+  2023-24 NorCal_d2 JFM: obs 126% | models wet call 5/7, model range 86-126%, median 103%
+  2023-24 SoCal_d6 DJF: obs 147% | models wet call 4/7, model range 71-147%, median 125%
+  2023-24 SoCal_d6 JFM: obs 161% | models wet call 5/7, model range 87-166%, median 133%
+
+2026 Sep-init:
+           model    region season  nino34_NDJ_model  pct_normal  frac_members_above_normal  n_mem
+COLA-RSMAS-CCSM4 NorCal_d2    DJF              3.00      120.78                       0.70     10
+COLA-RSMAS-CCSM4 NorCal_d2    JFM              3.00      131.62                       0.80     10
+COLA-RSMAS-CCSM4  SoCal_d6    DJF              3.00      161.34                       0.80     10
+COLA-RSMAS-CCSM4  SoCal_d6    JFM              3.00      170.05                       0.90     10
+COLA-RSMAS-CESM1 NorCal_d2    DJF              4.10      116.38                       0.80     10
+COLA-RSMAS-CESM1 NorCal_d2    JFM              4.10      123.73                       0.80     10
+COLA-RSMAS-CESM1  SoCal_d6    DJF              4.10      209.26                       1.00     10
+COLA-RSMAS-CESM1  SoCal_d6    JFM              4.10      197.67                       1.00     10
+     CanSIPS-IC4 NorCal_d2    DJF              3.84      147.49                       0.82     40
+     CanSIPS-IC4 NorCal_d2    JFM              3.84      146.42                       0.85     40
+     CanSIPS-IC4  SoCal_d6    DJF              3.84      201.23                       0.72     40
+     CanSIPS-IC4  SoCal_d6    JFM              3.84      197.90                       0.78     40
+    NASA-GEOSS2S NorCal_d2    DJF              4.59      115.07                       0.60     10
+    NASA-GEOSS2S NorCal_d2    JFM              4.59      121.95                       0.80     10
+    NASA-GEOSS2S  SoCal_d6    DJF              4.59      119.06                       0.50     10
+    NASA-GEOSS2S  SoCal_d6    JFM              4.59      132.95                       0.80     10
+      NCEP-CFSv2 NorCal_d2    DJF              3.51      111.70                       0.78      9
+      NCEP-CFSv2 NorCal_d2    JFM              3.51      101.94                       0.70     10
+      NCEP-CFSv2  SoCal_d6    DJF              3.51      122.97                       0.78      9
+      NCEP-CFSv2  SoCal_d6    JFM              3.51      111.94                       0.70     10
+                   mean  median    min    max  count
+region    season                                    
+NorCal_d2 DJF     122.0   116.0  112.0  147.0      5
+          JFM     125.0   124.0  102.0  146.0      5
+SoCal_d6  DJF     163.0   161.0  119.0  209.0      5
+          JFM     162.0   170.0  112.0  198.0      5
+model NDJ Nino3.4 2026 (own 1991-2020 clim): {'COLA-RSMAS-CCSM4': 3.0, 'COLA-RSMAS-CESM1': 4.1, 'CanSIPS-IC4': 3.84, 'NASA-GEOSS2S': 4.59, 'NCEP-CFSv2': 3.51}
+
+Observed linear fit (ONI, 1950-2025) evaluated at x (pure extrapolation beyond max obs ONI NDJ 2.59):
+  SoCal_d6 DJF: x=2.5: 134%, x=3.3: 148%, x=3.9: 158%
+  SoCal_d6 JFM: x=2.5: 153%, x=3.3: 172%, x=3.9: 186%
+  NorCal_d2 DJF: x=2.5: 114%, x=3.3: 119%, x=3.9: 123%
+  NorCal_d2 JFM: x=2.5: 123%, x=3.3: 132%, x=3.9: 138%

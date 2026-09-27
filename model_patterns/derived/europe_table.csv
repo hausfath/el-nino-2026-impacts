@@ -1,0 +1,37 @@
+region,var,season,lit_expect,mmm_z,models_pos,models_neg,p_two_sided,robust_frac_same_sign,lmr_z,q_BH,verdict
+Scandinavia & Baltic,pr,OND,+,0.12,10,3,0.0923,0.0,,0.1582,no reliable signal
+Scandinavia & Baltic,pr,JF,−,0.18,9,4,0.2668,0.0,,0.3558,no reliable signal
+Scandinavia & Baltic,t,OND,+,-0.27,4,7,0.5488,0.0,-0.27,0.5987,no reliable signal
+Scandinavia & Baltic,t,JF,−,-0.56,0,11,0.001,0.0,-0.46,0.007,moderate (matches lit)
+UK & Ireland,pr,OND,+,0.36,12,1,0.0034,0.07,,0.0112,moderate (matches lit)
+UK & Ireland,pr,JF,−,0.18,12,1,0.0034,0.0,,0.0112,no reliable signal
+UK & Ireland,t,OND,+,0.06,6,5,1.0,0.0,-0.59,1.0,no reliable signal
+UK & Ireland,t,JF,−,-0.25,4,7,0.5488,0.0,-0.96,0.5987,no reliable signal
+Central Europe,pr,OND,+,0.32,12,1,0.0034,0.11,,0.0112,moderate (matches lit)
+Central Europe,pr,JF,−,0.3,11,2,0.0225,0.0,,0.0505,moderate (opposite to lit)
+Central Europe,t,OND,+,0.09,7,4,0.5488,0.0,-0.09,0.5987,no reliable signal
+Central Europe,t,JF,−,-0.16,3,8,0.2266,0.0,-0.12,0.3398,no reliable signal
+Iberia,pr,OND,−,0.21,11,2,0.0225,0.04,,0.0505,no reliable signal
+Iberia,pr,JF,+,0.19,10,3,0.0923,0.0,,0.1582,no reliable signal
+Iberia,t,OND,+,0.44,10,1,0.0117,0.0,-0.25,0.0325,moderate (matches lit)
+Iberia,t,JF,none,0.73,11,0,0.001,0.0,-0.27,0.007,moderate (no lit expectation)
+Italy & Balkans,pr,OND,−,0.21,11,2,0.0225,0.02,,0.0505,no reliable signal
+Italy & Balkans,pr,JF,+,0.07,9,4,0.2668,0.0,,0.3558,no reliable signal
+Italy & Balkans,t,OND,+,0.16,9,2,0.0654,0.0,-0.14,0.1386,no reliable signal
+Italy & Balkans,t,JF,none,0.22,7,4,0.5488,0.0,-0.06,0.5987,no reliable signal
+Eastern Europe,pr,OND,+,0.25,12,1,0.0034,0.02,,0.0112,moderate (matches lit)
+Eastern Europe,pr,JF,−,0.37,12,1,0.0034,0.04,,0.0112,moderate (opposite to lit)
+Eastern Europe,t,OND,+,-0.29,3,8,0.2266,0.0,-0.16,0.3398,no reliable signal
+Eastern Europe,t,JF,−,-0.21,3,8,0.2266,0.0,-0.07,0.3398,no reliable signal
+Scandinavia & Baltic,pr,DJF,none,0.2,10,3,0.0923,0.02,,0.1582,no reliable signal
+UK & Ireland,pr,DJF,none,0.24,12,1,0.0034,0.0,,0.0112,no reliable signal
+Central Europe,pr,DJF,none,0.42,13,0,0.0002,0.24,,0.0044,moderate (no lit expectation)
+Iberia,pr,DJF,none,0.19,10,3,0.0923,0.0,,0.1582,no reliable signal
+Italy & Balkans,pr,DJF,none,0.07,9,4,0.2668,0.02,,0.3558,no reliable signal
+Eastern Europe,pr,DJF,none,0.49,13,0,0.0002,0.55,,0.0044,moderate (no lit expectation)
+Scandinavia & Baltic,t,DJF,none,-0.51,1,10,0.0117,0.0,-0.47,0.0325,moderate (no lit expectation)
+UK & Ireland,t,DJF,none,-0.06,5,6,1.0,0.0,-0.91,1.0,no reliable signal
+Central Europe,t,DJF,none,-0.0,6,5,1.0,0.0,-0.09,1.0,no reliable signal
+Iberia,t,DJF,none,0.81,11,0,0.001,0.0,-0.28,0.007,moderate (no lit expectation)
+Italy & Balkans,t,DJF,none,0.28,7,4,0.5488,0.0,-0.06,0.5987,no reliable signal
+Eastern Europe,t,DJF,none,-0.21,4,7,0.5488,0.0,-0.12,0.5987,no reliable signal

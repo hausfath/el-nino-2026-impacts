@@ -1,0 +1,17 @@
+[1] NMME prate: equal-weight mean of 6 model ENSMEANs vs CPC NMME.ENSMEAN file: pattern r min 1.0000 over 9 leads; max |diff| 2.86e-06
+[1] NMME tmp2m: equal-weight mean of 6 model ENSMEANs vs CPC NMME.ENSMEAN file: pattern r min 1.0000 over 9 leads; max |diff| 0
+[2] SON C3S ncep vs NMME CFSv2: precip r 0.972, T2m r 0.945
+[2] SON C3S eccc vs NMME CanESM5+GEM5.2_NEMO: precip r 0.975, T2m r 0.921
+[2] DJF C3S ncep vs NMME CFSv2: precip r 0.990, T2m r 0.972
+[2] DJF C3S eccc vs NMME CanESM5+GEM5.2_NEMO: precip r 0.968, T2m r 0.945
+[3] NMME prob target 800: r(Pabove-Pbelow, ENSMEAN mean of lead months) {'months 0-2': np.float64(0.749), 'months 1-3': np.float64(0.676), 'months 2-4': np.float64(0.573), 'months 3-5': np.float64(0.483)}
+[3] NMME prob target 801: r(Pabove-Pbelow, ENSMEAN mean of lead months) {'months 0-2': np.float64(0.726), 'months 1-3': np.float64(0.757), 'months 2-4': np.float64(0.704), 'months 3-5': np.float64(0.618)}
+[3] NMME prob target 802: r(Pabove-Pbelow, ENSMEAN mean of lead months) {'months 0-2': np.float64(0.646), 'months 1-3': np.float64(0.746), 'months 2-4': np.float64(0.778), 'months 3-5': np.float64(0.746)}
+[4] SON CFSv2: trend offset removed, 60S-60N land mean 0.72 °C
+[4] SON GEM5.2_NEMO: trend offset removed, 60S-60N land mean 1.04 °C
+[4] SON ecmwf: trend offset removed, 60S-60N land mean 0.75 °C
+[5] SON: fraction of 60S-60N land with >=80% models warm, raw 0.95; trend-adjusted robust warm 0.44, robust cold 0.05
+[4] DJF CFSv2: trend offset removed, 60S-60N land mean 0.61 °C
+[4] DJF GEM5.2_NEMO: trend offset removed, 60S-60N land mean 0.88 °C
+[4] DJF ecmwf: trend offset removed, 60S-60N land mean 0.64 °C
+[5] DJF: fraction of 60S-60N land with >=80% models warm, raw 0.90; trend-adjusted robust warm 0.58, robust cold 0.05

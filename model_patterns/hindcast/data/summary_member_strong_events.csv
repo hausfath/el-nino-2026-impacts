@@ -1,0 +1,5 @@
+region,season,n_members,models,frac_below_normal_pooled,frac_below70_pooled,frac_below_normal_model_median,median_pct
+NorCal_d2,DJF,448,11,0.324,0.118,0.300,122.100
+NorCal_d2,JFM,448,11,0.312,0.094,0.300,122.150
+SoCal_d6,DJF,448,11,0.266,0.129,0.200,145.550
+SoCal_d6,JFM,448,11,0.228,0.092,0.150,150.950

@@ -1,0 +1,9 @@
+region,season,set,n_models,ratio_median,ratio_min,ratio_max,ratio1950_median,model_slope_median,model_slope_min,model_slope_max,n_ratio_gt1,skill_median
+NorCal_d2,DJF,all,11,0.864,0.058,2.130,0.925,6.403,0.436,11.129,4,0.146
+NorCal_d2,DJF,active,6,1.004,0.450,1.491,1.073,7.424,2.708,11.042,3,0.172
+NorCal_d2,JFM,all,11,0.589,-0.063,1.322,0.535,5.849,-0.589,12.851,4,0.174
+NorCal_d2,JFM,active,6,0.919,0.171,1.254,0.860,9.402,1.357,12.851,3,0.180
+SoCal_d6,DJF,all,11,1.356,0.224,1.770,1.236,21.141,3.545,27.277,8,0.297
+SoCal_d6,DJF,active,6,1.098,0.763,1.770,1.046,17.877,11.831,27.277,4,0.331
+SoCal_d6,JFM,all,11,1.010,0.150,1.302,0.950,22.652,3.263,28.406,6,0.337
+SoCal_d6,JFM,active,6,0.998,0.737,1.302,0.881,20.995,16.046,28.406,3,0.350

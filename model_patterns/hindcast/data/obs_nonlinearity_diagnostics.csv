@@ -1,0 +1,9 @@
+index,season,region,quad_t,resid_sd,resid2015,resid2015_z,n_strong,n_upper_tercile,n_lower_tercile,n_above_normal,all_yrs_frac_above_normal
+ONI_NDJ,DJF,NorCal_d2,0.731,39.873,-8.848,-0.222,8,4,1,6,0.395
+ONI_NDJ,DJF,SoCal_d6,0.841,54.477,-75.202,-1.380,8,6,0,6,0.316
+ONI_NDJ,JFM,NorCal_d2,1.950,41.011,2.342,0.057,8,6,1,7,0.421
+ONI_NDJ,JFM,SoCal_d6,0.551,59.470,-86.722,-1.458,8,6,1,6,0.355
+RONI_NDJ,DJF,NorCal_d2,0.664,39.909,-5.714,-0.143,8,4,2,5,0.395
+RONI_NDJ,DJF,SoCal_d6,1.235,54.326,-69.402,-1.278,8,6,0,6,0.316
+RONI_NDJ,JFM,NorCal_d2,2.305,40.995,6.519,0.159,8,5,2,6,0.421
+RONI_NDJ,JFM,SoCal_d6,1.135,59.000,-79.562,-1.349,8,6,1,6,0.355

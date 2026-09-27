@@ -1,0 +1,17 @@
+region,var,season,lit_expect,clim_mm_day,mmm_z,lmr_z,pos,neg,p2,robust_frac,q_BH,verdict
+Guinea Coast,pr,SON,−,5.15,-0.46,,2,11,0.0225,0.31,0.0299,moderate (matches lit)
+Guinea Coast,pr,OND,−,3.04,-0.03,,8,5,0.5811,0.03,0.6198,no reliable signal
+Guinea Coast,pr,DJF,−,0.97,-0.21,,2,11,0.0225,0.06,0.0299,no reliable signal
+Guinea Coast,pr,MAM,−,4.61,-0.31,,1,5,0.2188,0.17,0.2692,no reliable signal
+Nigeria/Cameroon,pr,OND,−,2.32,0.3,,11,2,0.0225,0.24,0.0299,moderate (OPPOSITE to lit)
+Nigeria/Cameroon,pr,MAM,−,3.6,0.04,,3,3,1.0,0.0,1.0,no reliable signal
+Sahel,pr,SON,−,1.47,-0.06,,4,9,0.2668,0.0,0.305,no reliable signal
+West Africa (all),t,SON,+,,2.0,-0.04,11,0,0.001,0.2,0.0022,moderate (matches lit)
+West Africa (all),t,DJF,+,,1.45,-0.02,11,0,0.001,0.08,0.0022,moderate (matches lit)
+West Africa (all),t,JF,+,,1.54,0.05,11,0,0.001,0.09,0.0022,moderate (matches lit)
+Guinea Coast,t,SON,+,,1.75,-1.14,10,1,0.0117,0.0,0.0208,moderate (matches lit)
+Guinea Coast,t,DJF,+,,2.14,-0.37,11,0,0.001,0.0,0.0022,moderate (matches lit)
+Guinea Coast,t,JF,+,,2.19,-0.26,11,0,0.001,0.0,0.0022,moderate (matches lit)
+Sahel,t,SON,+,,1.92,0.56,10,1,0.0117,0.46,0.0208,ROBUST (matches lit)
+Sahel,t,DJF,+,,0.97,0.12,11,0,0.001,0.14,0.0022,moderate (matches lit)
+Sahel,t,JF,+,,1.07,0.18,11,0,0.001,0.15,0.0022,moderate (matches lit)

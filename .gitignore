@@ -1,0 +1,11 @@
+# raw downloads (re-fetched by the scripts; ~400 MB)
+raw/
+*/raw/
+*/*/raw/
+# local-only settings (paths to private working folders)
+local_paths.json
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+node_modules/

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>El Niño blog figure</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/elnino_map/app.css">
+<link rel="stylesheet" href="fig.css">
+<script>
+  const Q = new URLSearchParams(location.search);
+  document.documentElement.dataset.theme = Q.get('theme') === 'light' ? 'light' : 'dark';
+</script>
+</head>
+<body>
+<div id="fig"></div>
+<script src="/elnino_map/js/engine.js"></script>
+<script src="/elnino_map/js/cards.js"></script>
+<script src="fig.js"></script>
+</body>
+</html>
