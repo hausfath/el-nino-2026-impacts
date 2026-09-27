@@ -8,7 +8,8 @@ os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 ALL_SRC = ["cb_el_nino_impacts_draft.md"] + ["research/"+f for f in [
  "impacts-literature.md","lit_africa_iod.md","lit_canada_nw.md","lit_chile_altiplano.md","lit_europe.md",
  "lit_missing_americas.md","lit_missing_asiapacific.md","impacts-verification-americas.md",
- "impacts-verification-asia-foundational.md","FACTCHECK.md"]]
+ "impacts-verification-asia-foundational.md","FACTCHECK.md",
+ "lit_americas_core.md","lit_asia_foundational.md"]]   # the last two restate the two verification files for the public repo
 # The public repo leaves out the blog draft and two files tied to a separate piece; links and source lines that only
 # point there are reported as "not checkable here" instead of failures.
 SRC = [f for f in ALL_SRC if os.path.exists(f)]
